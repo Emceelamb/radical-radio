@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 
 import subprocess
+import os
 import time
 import keyboard
 
@@ -34,7 +35,9 @@ while True:
         # turn red light on
         GPIO.output(23,GPIO.HIGH)
         if(foxIsPlaying==False):
+	    cnnIsPlaying = False
             foxIsPlaying = True
+	    
             subprocess.Popen(['sudo','mpg123',fox_url])
             print('fox is playing')
         time.sleep(1)
@@ -46,6 +49,7 @@ while True:
         # turn blue light ON
         GPIO.output(24,GPIO.HIGH)
         if(cnnIsPlaying==False):
+	    foxIsPlaying=False
             cnnIsPlaying=True
             subprocess.Popen(['sudo','mpg123',cnn_url])
             print('cnn play') 
